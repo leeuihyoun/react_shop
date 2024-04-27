@@ -4,7 +4,7 @@ import {Container,Col,Row, Nav, Navbar, Button} from 'react-bootstrap'
 
 import DetailPage from './pages/Detail.js';
 
-import{Routes, Route, useNavigate} from 'react-router-dom';
+import{Routes, Route, useNavigate, Outlet, Link} from 'react-router-dom';
 
 import './App.css';
 //자바스크립트 파일은 확장자명을 생략
@@ -21,10 +21,11 @@ function App() {
   // css를 제공해주는 사이트 : bootstrap
   // npm install react-bootstrap bootstrap
   let [items,setItemss] = useState(data);
-  let [photo, setPhoto] = useState(['/cupcake.jpg','/pancake.jpg','/pizza.jpg']);
+  let [photo, setPhoto] = useState(['/cupcake.jpg','/pancake.jpg','/pizza.jpg','/logo192.png']);
   let navigate = useNavigate()
   
   return (
+
     <div className="App">
          
          <Navbar bg="dark" data-bs-theme="dark">
@@ -41,30 +42,37 @@ function App() {
       </Navbar>
       <Routes>
         <Route path='/' element={<>
-            <div className={'main-bg'}>
-
-            </div>
-
+            <div className={'main-bg'}> </div>
           <Container>
             <Row>
-    
                 {items.map((item, index) => (
                 <ItemCol key={index} data={item} img={photo[index]} />
              ))}
             </Row>
             <Button variant="primary">Primary</Button>{' '}
-
 </Container>
 
 
 
-        
         </>}>
-
         </Route>
-        <Route path='/detail'element={<DetailPage items={items}/>}></Route>
+        {/* :id ==> URL파라미터(변수)를 통해서 상세아이템 변경 */}
+        <Route path='/detail/:id'element={<DetailPage items={items} img ={photo}/>}></Route>
+        {/* <Route path='/detail/:id'element={<DetailPage items={items} id ={1} img ={photo}/>}></Route>
+        <Route path='/detail/:id'element={<DetailPage items={items} id ={2} img ={photo}/>}></Route> */}
+        <Route path='/about'element={<AboutPage/>}>
+        <Route path='address' element = {<div>주소</div>}></Route>
+        <Route path='location' element = {<div>위치</div>}></Route>  
+        </Route>
+        <Route path='/about/member'element={<div>어바웃 멤버 페이지</div>}>
+       
+        </Route>
+        <Route path='*'element={<div>그 외의 페이지(404)</div>}></Route>
+
       </Routes>
- 
+      {/*리액튼느 하나의 html을 다시 그리는 방식이기 때문에 html을 이동하는 <a>태그 보다는 <Link>를 사용 */}
+        <Link to="/about/address"><Button variant='warning'>리엑트 부트스트랩</Button></Link>
+        <a href='/about/location'>로케이션 페이지로</a>
       
      
     </div>
@@ -74,6 +82,19 @@ function App() {
 }
 
 export default App;
+
+function AboutPage(){
+  return(
+    <>
+      <dvi>
+        <h4>
+          어바웃 페이지
+          <Outlet/>
+        </h4>
+      </dvi>
+    </>
+  )
+}
 
 //컴포넌트는 맨 앞글자는 대문자
 //return에 html(jsx) 코드

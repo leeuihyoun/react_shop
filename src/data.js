@@ -17,6 +17,12 @@ let data = [
 		title : '피자',
 		content: '맛있는 피자',
 		price : 12000
+	},
+	{
+		id:3,
+		title : '로고',
+		content: '로고',
+		price : 10000
 	}
 ];
 let num1 = 1;
