@@ -4,16 +4,21 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './store';
 // npm install react-router-dom@6
 //<App/> 을 <BrowserRouter></BrowserRouter>로 감싸준다
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  //<React.StrictMode>
+   <Provider store ={store}>
     <BrowserRouter>
     <App />
     </BrowserRouter>
+   </Provider>
+
     
-  </React.StrictMode>
+ // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

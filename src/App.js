@@ -14,6 +14,7 @@ import {num1} from './data.js'
 //이미지 사용하려면 import
 import mainBG from './backs.jpg'
 import { useState } from 'react';
+import Cart from './pages/Cart.js';
 
 
 //라우터는 창을 새로 불러오는게 아니라 재렌더링 방식을 사용
@@ -35,6 +36,7 @@ function App() {
             <Nav.Link onClick={()=>{navigate('/')}}>home</Nav.Link>
             <Nav.Link onClick={()=>{navigate('/detail')}}>상세페이지</Nav.Link>
             <Nav.Link onClick={()=>{navigate('/about')}}>About</Nav.Link>
+            <Nav.Link onClick={()=>{navigate('/Cart')}}>장바구니</Nav.Link>
             <Nav.Link onClick={()=>{navigate(-1)}}>뒤로가기</Nav.Link>
             <Nav.Link onClick={()=>{navigate(1)}}>앞으로가기</Nav.Link>
           </Nav>
@@ -67,6 +69,7 @@ function App() {
         <Route path='/about/member'element={<div>어바웃 멤버 페이지</div>}>
        
         </Route>
+        <Route path='/Cart'element={<Cart/>}></Route>
         <Route path='*'element={<div>그 외의 페이지(404)</div>}></Route>
 
       </Routes>
